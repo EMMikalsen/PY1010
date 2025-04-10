@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# Del a) 
+# Del a) Lese inn filen support_uke_24.xlsx og poplulere arrayene
 ##################################################################
 
 df=pd.read_excel('support_uke_24.xlsx')
@@ -21,7 +21,7 @@ varighet=df['Varighet'].values
 score=df['Tilfredshet'].values
 
 
-# Del b)
+# Del b) Lage søylediagram som viser henvendelse pr. ukedag
 ##################################################################
 
 print('\n',"Del b",'\n',"***************************")
@@ -56,7 +56,7 @@ plt.ylabel('Henvendelser')
 plt.show()  
 
 
-# Del c)
+# Del c) Finne minste og lengste samtaletid
 ##################################################################
 
 print('\n','\n',"Del c",'\n',"***************************",'\n')
@@ -65,7 +65,7 @@ print("Lengste samtale-varighet:",max(varighet))
 print("Korteste samtale-varighet:",  min(varighet))
 
 
-# Del d) 
+# Del d) Gjennomsnittlig samtaletid
 ##################################################################
 
 print('\n','\n',"Del d",'\n',"***************************",'\n')
@@ -77,8 +77,6 @@ for sVarighet in varighet:
     iTidsekunder = int(aTid[0]) * 60 * 60   + int(aTid[1]) * 60 + int(aTid[2])
     iTotal = iTotal + iTidsekunder
 iSnitTid = int(iTotal/len(varighet))
-
-#iSnitTid = iSnitTid +  60 * 60 * 2
 
 sTekst = "Gjennomsnittlig samtaletid: "
 iSnittTidTimer = iSnitTid // (60 * 60)
@@ -92,7 +90,7 @@ sTekst = sTekst + str(iSnitTid // 60) + " minutter " + str(iSnitTid % 60) + " se
 print(sTekst)
 
 
-# Del e) 
+# Del e) Sektordiagram som viser henvendelse i ulike perioder
 ##################################################################
 
 print('\n','\n',"Del e",'\n',"***************************")
@@ -120,7 +118,7 @@ plt.pie([i08_10, i10_12, i12_14, i14_16], labels=sLabelTekst)
 plt.show()
 
 
-# Del f) 
+# Del f) Finne kundetilfredshet (NPS = % positive kunder - % negative kunder) 
 ##################################################################
 
 print('\n','\n',"Del f",'\n',"***************************",'\n')
@@ -128,7 +126,7 @@ print('\n','\n',"Del f",'\n',"***************************",'\n')
 i1 = i2 = i3 = i4 = i5 = i6 = i7 = i8 = i9 = i10 = 0
 iAntall = 0
 for x in score:
-    if not(pd.isna(x)):
+    if not(pd.isna(x)): # Tar bort kunder som ikke har gitt vurdering
         iAntall +=1
         y = int(x)
         if y == 1:
